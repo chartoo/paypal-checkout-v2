@@ -7,12 +7,12 @@ $dotenv->load();
 $debug= filter_var( $_ENV['DEBUG'], FILTER_VALIDATE_BOOLEAN);
 $app_mode=$_ENV['APP_MODE'];
 $paypalConfig = [
-    'client_id' => $_ENV['PAYPAL_CLIENT_ID'],
-    'client_secret' => $_ENV['PAYPAL_CLIENT_SECRET'],
+    'client_id' =>$app_mode=='live'? $_ENV['PAYPAL_LIVE_CLIENT_ID']: $_ENV['PAYPAL_CLIENT_ID'],
+    'client_secret' =>$app_mode=='live'? $_ENV['PAYPAL_LIVE_CLIENT_SECRET']: $_ENV['PAYPAL_CLIENT_SECRET'],
     'return_url' => getUrl().$_ENV['PAYPAL_RETURN_URL'],
     'cancel_url' => getUrl().$_ENV['PAYPAL_CANCEL_URL'],
     'success_url' => getUrl().$_ENV['PAYPAL_SUCCESS_URL'],
-    'webhook_id' => $_ENV['PAYPAL_WEBHOOK_ID']
+    'webhook_id' =>$app_mode=='live'? $_ENV['PAYPAL_LIVE_WEBHOOK_ID'] : $_ENV['PAYPAL_WEBHOOK_ID']
 ];
 
 function getUrl()

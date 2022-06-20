@@ -1,0 +1,11 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine on
+    RewriteRule ^(.*)$ /$1 [L,R=302]
+</IfModule>
+
+<FilesMatch "\.(sh)$">
+deny from all
+</FilesMatch>
+<FilesMatch "^.env">
+deny from all
+</FilesMatch>
